@@ -1,0 +1,110 @@
+.profile {
+  width: 410px;
+  padding-top: 74px;
+  padding-bottom: 60px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__logout {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #EE3465;
+  margin: 0 auto;
+  text-decoration: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.profile__logout:hover {
+  opacity: 0.7;
+}
+
+.profile__inputblock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #424242;
+}
+
+.profile__inputblock:first-child {
+  padding-top: 0;
+}
+
+.profile__inputblock:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.profile__label {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.profile__input {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FFFFFF;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  text-align: right;
+  width: 70%;
+}
+
+.profile__input:focus {
+  box-shadow: 0 0 6px #ffffff2b;
+}
+
+.profile__errormessage {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  margin: 10px 0 0;
+}
+
+.profile__mainerror {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FF004C;
+  margin: 0;
+}
+
+@media screen and (max-width:768px){
+  .profile {
+    padding-top: 236px;
+  }
+
+}
+
+@media screen and (max-width:600px){
+  .profile {
+    padding-top: 70px;
+    width: calc(100% - 60px);
+  }
+
+  .profile__logout {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
