@@ -1,17 +1,15 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
 import Header from "../Header/Header";
 import Form from '../Form/Form';
 import './Profile.css'
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 
 const Profile = (props) => {
-  const { logedIn, onUpdateUser } = props;
-  const history = useHistory();
+  const { logedIn, onUpdateUser, isError, errorText, handleProfileError, onSignOut } = props;
 
   const currentUser = React.useContext(CurrentUserContext)
-  const [isNameValid, setIsNameValid] = React.useState(true);
-  const [isEmailValid, setIsEmailValid] = React.useState(true);
+  const [isNameValid, setIsNameValid] = React.useState(false);
+  const [isEmailValid, setIsEmailValid] = React.useState(false);
 
   const [formValues, setFormValues] = React.useState({
     username: currentUser.name,
@@ -19,18 +17,19 @@ const Profile = (props) => {
   });
 
   const [formValidity, setFormValidity] = React.useState({
-    nameValid: true,
-    emailValid: true
+    nameValid: false,
+    emailValid: false,
   });
 
   React.useEffect(() => {
     setFormValues({
       username: currentUser.name,
-      useremail: currentUser.email
+      useremail: currentUser.email,
     })
   }, [currentUser])
 
   React.useEffect(() => {
+    handleProfileError();
     const regex = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
     const nameValidity = formValues.username.trim().length > 1;
     const emailValidity = formValues.useremail.trim().length > 5 && regex.test(formValues.useremail.trim());
@@ -41,13 +40,7 @@ const Profile = (props) => {
       nameValid: isNameValid,
       emailValid: isEmailValid
     })
-  }, [isEmailValid, isNameValid, formValues.username, formValues.useremail])
-
-  function signOut(){
-    // localStorage.removeItem('jwt');
-    props.logIn(false);
-    history.push('/');
-  }
+  }, [isEmailValid, isNameValid, formValues.username, formValues.useremail, handleProfileError])
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target
@@ -65,7 +58,9 @@ const Profile = (props) => {
 
   const { username, useremail } = formValues;
   const { nameValid, emailValid } = formValidity;
-  const isSubmitAble = nameValid && emailValid;
+  const isSubmitAble = nameValid
+    && emailValid
+    && !(username === currentUser.name && useremail === currentUser.email);
 
   return (
     <>
@@ -79,6 +74,8 @@ const Profile = (props) => {
           btntitle='Редактировать'
           onSubmit={handleSubmit}
           valid={isSubmitAble}
+          isError={isError}
+          errorText={errorText}
         >
           <div className='profile__inputblock'>
             <label htmlFor='profilename' className='profile__label'>
@@ -111,7 +108,7 @@ const Profile = (props) => {
           </div>
           {!isEmailValid && <span className='profile__errormessage'>Email некорретен</span>}
         </Form>
-        <p onClick={signOut} className="profile__logout">Выйти из аккаунта</p>
+        <p onClick={onSignOut} className="profile__logout">Выйти из аккаунта</p>
       </main>
     </>
   );

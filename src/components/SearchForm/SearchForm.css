@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+.search__formblock {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 41px;
+}
+
 .search__form {
   width: 100%;
   background: #2F2F2F;
@@ -16,7 +23,6 @@
   padding: 6px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 41px;
   box-sizing: border-box;
 }
 
@@ -48,6 +54,16 @@
   line-height: 17px;
   margin: 0;
   color: #8B8B8B;
+}
+
+.search__errormessage {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #EE3465;
+  margin: 10px 0 0 22px;
 }
 
 .search__button {

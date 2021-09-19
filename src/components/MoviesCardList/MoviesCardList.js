@@ -1,10 +1,9 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
-import { moviesList } from '../../utils/movies'
 
 const MoviesCardList = (props) => {
-  const { place } = props;
+  const { place, moviesList, handleLikeClick } = props;
   const [cardNumber, setCardNumber] = React.useState(0);
   const documentWidth = document.documentElement.clientWidth;
 
@@ -41,16 +40,17 @@ const MoviesCardList = (props) => {
   }
 
   return (
-    <section className='movies'>
-      <ul className='movies__list'>
+    <section className='movies__block'>
+      {moviesList && moviesList.length > 0 && <ul className='movies__list'>
         {moviesList.slice(0, cardNumber).map((movie) => (
           <MoviesCard
-            key={movie.movieId}
+            key={movie.id ? movie.id : movie.movieId}
             movie={movie}
             place={place}
+            handleLikeClick={handleLikeClick}
           />
         ))}
-      </ul>
+      </ul>}
       {cardNumber < moviesList.length  && <button
         type='button'
         className='movies__button'

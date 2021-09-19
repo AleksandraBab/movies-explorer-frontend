@@ -1,0 +1,13 @@
+.movies__text {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin: 40px 0 0;
+}
+
+.movies__text_type_error {
+  color: #EE3465;
+}

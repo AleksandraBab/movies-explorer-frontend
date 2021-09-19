@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 import './Register.css'
 
 function Register (props) {
-  const { onRegister } = props
+  const { onRegister, isError, errorText } = props
 
   const [isEmailValid, setIsEmailValid] = React.useState(false);
   const [isNameValid, setIsNameValid] = React.useState(false);
@@ -65,7 +65,7 @@ function Register (props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const { userName, email, password } = formValues;
-    onRegister({ name: userName, email, password });
+    onRegister(email, password, userName);
   }
 
   const { userName, email, password } = formValues;
@@ -83,6 +83,8 @@ function Register (props) {
         btntitle='Зарегистрироваться'
         valid={isSubmitAble}
         onSubmit={handleSubmit}
+        isError={isError}
+        errorText={errorText}
       >
         <Input
           value={userName}
