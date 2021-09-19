@@ -12,6 +12,7 @@ const ERROR_400 = 'Ошибка: 400';
 const ERROR_404 = 'Ошибка: 404';
 
 const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+const MAIN_URL = `${window.location.protocol}//api.capibara-movies.nomoredomains.club`;
 
 export {
   ERROR_MESSAGE_500,
@@ -26,4 +27,5 @@ export {
   ERROR_400,
   ERROR_404,
   BASE_URL,
+  MAIN_URL,
 }

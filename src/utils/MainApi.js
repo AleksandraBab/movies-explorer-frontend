@@ -1,5 +1,4 @@
-// const MAIN_URL = 'https://api.capibara-movies.nomoredomains.club';
-const MAIN_URL = 'http://localhost:3001';
+import { MAIN_URL } from './config';
 
 class Api {
   constructor(options) {

@@ -75,6 +75,13 @@ function App() {
       .then((data) => {
         localStorage.setItem('jwt', data.token);
         setLogedIn(true);
+        mainApi.getUser(data.token)
+          .then((res) => {
+            setCurrentUser(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         history.push('/movies')
       })
       .catch((err) => {
