@@ -29,6 +29,10 @@
   opacity: 0.8;
 }
 
+.button_disabled:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 600px) {
   .button {
     font-size: 12px;

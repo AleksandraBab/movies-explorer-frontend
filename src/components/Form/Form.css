@@ -40,6 +40,21 @@
   top: 218px;
 }
 
+.form__success {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #3DDC84;
+  width: 100%;
+  margin: 0 0 20px;
+  position: relative;
+  top: 218px;
+  word-break: break-all;
+}
+
 .form__button {
   width: 100%;
   border: 0;
@@ -104,6 +119,10 @@
   }
 
   .form__error_place_profile {
+    top: 370px;
+  }
+
+  .form__success {
     top: 370px;
   }
 }

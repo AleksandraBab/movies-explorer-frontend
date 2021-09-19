@@ -5,7 +5,14 @@ import './Profile.css'
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 
 const Profile = (props) => {
-  const { logedIn, onUpdateUser, isError, errorText, handleProfileError, onSignOut } = props;
+  const {
+    logedIn,
+    onUpdateUser,
+    isError,
+    errorText,
+    onSignOut,
+    successText
+  } = props;
 
   const currentUser = React.useContext(CurrentUserContext)
   const [isNameValid, setIsNameValid] = React.useState(false);
@@ -29,7 +36,6 @@ const Profile = (props) => {
   }, [currentUser])
 
   React.useEffect(() => {
-    handleProfileError();
     const regex = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
     const nameValidity = formValues.username.trim().length > 1;
     const emailValidity = formValues.useremail.trim().length > 5 && regex.test(formValues.useremail.trim());
@@ -40,7 +46,7 @@ const Profile = (props) => {
       nameValid: isNameValid,
       emailValid: isEmailValid
     })
-  }, [isEmailValid, isNameValid, formValues.username, formValues.useremail, handleProfileError])
+  }, [isEmailValid, isNameValid, formValues.username, formValues.useremail])
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target
@@ -76,6 +82,7 @@ const Profile = (props) => {
           valid={isSubmitAble}
           isError={isError}
           errorText={errorText}
+          successText={successText}
         >
           <div className='profile__inputblock'>
             <label htmlFor='profilename' className='profile__label'>

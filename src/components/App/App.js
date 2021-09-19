@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
 import "./App.css";
 import Main from "../Main/Main";
@@ -12,6 +12,19 @@ import SavedMovies from "../SavedMovies/SavedMovies"
 import NotFound from "../NotFound/NotFound";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { mainApi } from '../../utils/MainApi'
+import {
+  ERROR_MESSAGE_500,
+  ERROR_MESSAGE_AUTH,
+  ERROR_MESSAGE_UPD,
+  ERROR_MESSAGE_REG,
+  ERROR_MESSAGE_EMAIL,
+  SUCCESS,
+  ERROR_MESSAGE_401,
+  ERROR_409,
+  ERROR_401,
+  ERROR_400,
+  ERROR_404,
+} from '../../utils/config'
 
 function App() {
   const history = useHistory();
@@ -23,6 +36,7 @@ function App() {
   const [regError, setRegError] = React.useState(false);
   const [profileError, setProfileError] = React.useState(false);
   const [errorText, setErrorText] = React.useState('');
+  const [successText, setSuccessText] = React.useState('');
   const [savedMovies, setSavedMovies] = React.useState([]);
 
   const isLogIn = (value) => {
@@ -32,20 +46,6 @@ function App() {
   React.useEffect( () => {
     setSavedMovies(JSON.parse(localStorage.getItem('allmovies')));
   }, [])
-
-  //React.useEffect( () => {
-  //  if (logedIn) {
-  //    const jwt = localStorage.getItem('jwt');
-//
-  //    mainApi.getUser(jwt)
-  //      .then((res) => {
-  //        setCurrentUser(res);
-  //      })
-  //      .catch((err) => {
-  //        console.log(err);
-  //      });
-  //  }
-  //}, [logedIn])
 
   React.useEffect( () => {
     tokenCheck();
@@ -58,14 +58,13 @@ function App() {
         handleLogIn(email, password);
       })
       .catch((err) => {
-        console.log(err)
         setRegError(true);
-        if (err === 'Ошибка: 409') {
-          setErrorText('Пользователь с таким email уже существует.');
-        } else if (err === 'Ошибка: 400') {
-          setErrorText('При регистрации пользователя произошла ошибка');
+        if (err === ERROR_409) {
+          setErrorText(ERROR_MESSAGE_EMAIL);
+        } else if (err === ERROR_400) {
+          setErrorText(ERROR_MESSAGE_REG);
         } else {
-          setErrorText('На сервере произошла ошибка.');
+          setErrorText(ERROR_MESSAGE_500);
         }
       })
   };
@@ -80,18 +79,17 @@ function App() {
       })
       .catch((err) => {
         setLoginError(true);
-        if (err === 'Ошибка: 401') {
-          setErrorText('Вы ввели неправильный логин или пароль.');
-        } else if (err === 'Ошибка: 400') {
-          setErrorText('При авторизации произошла ошибка');
+        if (err === ERROR_401) {
+          setErrorText(ERROR_MESSAGE_401);
+        } else if (err === ERROR_400) {
+          setErrorText(ERROR_MESSAGE_AUTH);
         } else {
-          setErrorText('На сервере произошла ошибка.');
+          setErrorText(ERROR_MESSAGE_500);
         }
       });
   }
 
   const tokenCheck = () => {
-    console.log('tokenCheck')
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
 
@@ -99,9 +97,7 @@ function App() {
         .then((res) => {
           setCurrentUser(res);
           setLogedIn(true)
-          //console.log('history',history)
-          console.log('location',location)
-          //history.push('/movies');
+          history.push(location.pathname);
         })
         .catch((err) => {
           console.log(err);
@@ -116,15 +112,17 @@ function App() {
     mainApi.editProfileInfo(data, jwt)
       .then((res) => {
         setCurrentUser(res);
+        setSuccessText(SUCCESS)
       })
       .catch((err) => {
+        console.log(err);
         setProfileError(true);
-        if (err === 'Ошибка: 409') {
-          setErrorText('Пользователь с таким email уже существует.');
-        } else if (err === 'Ошибка: 400' || err === 'Ошибка: 404') {
-          setErrorText('При обновлении профиля произошла ошибка.');
+        if (err === ERROR_409) {
+          setErrorText(ERROR_MESSAGE_EMAIL);
+        } else if (err === ERROR_400 || err === ERROR_404) {
+          setErrorText(ERROR_MESSAGE_UPD);
         } else {
-          setErrorText('На сервере произошла ошибка.');
+          setErrorText(ERROR_MESSAGE_500);
         }
       });
   }
@@ -133,10 +131,6 @@ function App() {
     localStorage.clear();
     setLogedIn(false);
     history.push('/');
-  }
-
-  const handleProfileError = () => {
-    setProfileError(false);
   }
 
   return (
@@ -148,18 +142,26 @@ function App() {
           />
         </Route>
         <Route path="/signup">
-          <Register
-            onRegister={handleRegister}
-            isError={regError}
-            errorText={errorText}
-          />
+          {() =>
+           !logedIn ?
+            <Register
+              onRegister={handleRegister}
+              isError={regError}
+              errorText={errorText}
+            />
+            : <Redirect to="/movies" />
+          }
         </Route>
         <Route path="/signin">
-          <Login
-            onLogIn={handleLogIn}
-            isError={loginError}
-            errorText={errorText}
-          />
+          {() =>
+            !logedIn ?
+            <Login
+              onLogIn={handleLogIn}
+              isError={loginError}
+              errorText={errorText}
+            />
+            : <Redirect to="/movies" />
+          }
         </Route>
 
         <ProtectedRoute
@@ -181,8 +183,8 @@ function App() {
           onUpdateUser={handleUpdateUser}
           isError={profileError}
           errorText={errorText}
-          handleProfileError={handleProfileError}
           onSignOut={onSignOut}
+          successText={successText}
         />
 
         <Route path="*">

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import { BASE_URL } from './config'
 
 class Api {
  constructor(options) {

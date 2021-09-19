@@ -2,8 +2,17 @@ import Button from '../Button/Button';
 import './Form.css'
 
 function Form (props) {
-  const { place, title, children, btntitle, onSubmit, valid, errorText, isError } = props;
-  // error states will be added on the next stage of the project
+  const {
+    place,
+    title,
+    children,
+    btntitle,
+    onSubmit,
+    valid,
+    errorText,
+    isError,
+    successText,
+  } = props;
 
   return (
     <>
@@ -19,6 +28,7 @@ function Form (props) {
         {isError && <p className={`form__error
           ${place === 'profile' ? 'form__error_place_profile' : ''}`}
         >{errorText}</p>}
+        {successText && <p className='form__success'>{successText}</p>}
         {place === 'profile' && <button
           type='submit'
           className={`form__button ${valid ? '' : 'form__button_disabled'}`}
