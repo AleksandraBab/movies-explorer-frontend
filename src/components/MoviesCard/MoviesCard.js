@@ -3,24 +3,17 @@ import './MoviesCard.css'
 import { mainApi } from '../../utils/MainApi'
 
 const MoviesCard = (props) => {
-  const { movie, place, handleLikeClick } = props;
+  const { movie, place, handleLikeClick, savedCards } = props;
   const [isLiked, setIsLiked] = React.useState(false);
 
   React.useEffect( () => {
-    const jwt = localStorage.getItem('jwt');
-    mainApi.getMovies(jwt)
-      .then((movies) => {
-        const likedMovie = movies.find((item) => {
-          return movie.id == item.movieId;
-        })
-        if (likedMovie) {
-          setIsLiked(true);
-          movie._id = likedMovie._id;
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    if (savedCards) {
+      const likedMovie = savedCards.find((item) => movie.id == item.movieId);
+      if (likedMovie) {
+        setIsLiked(true);
+        movie._id = likedMovie._id;
+      }
+    }
   }, [])
 
   const onLike = (movie) => {

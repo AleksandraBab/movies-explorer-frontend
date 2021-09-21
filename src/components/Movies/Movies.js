@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import { api } from "../../utils/MoviesApi";
+import { mainApi } from '../../utils/MainApi'
 import Preloader from "../Preloader/Preloader";
 import './Movies.css';
 
@@ -14,6 +15,18 @@ const Movie = (props) => {
   const [errorShown, setErrorShown] = React.useState(false);
   const [moviesList, setMoviesList] = React.useState([]);
   const [shortMovie, setShortMovie] = React.useState(false);
+  const [savedCards, setSavedCards] = React.useState([]);
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    mainApi.getMovies(jwt)
+      .then((res) => {
+        setSavedCards(res);
+      })
+      .catch((err) => {
+        console.lof(err)
+      })
+  }, [])
 
   const searchMovies = (searchkey) => {
     setTextShown(false);
@@ -92,6 +105,7 @@ const Movie = (props) => {
         <MoviesCardList
           place='allmovies'
           moviesList={moviesList}
+          savedCards={savedCards}
         />
       </main>
       <Footer

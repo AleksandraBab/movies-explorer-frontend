@@ -25,7 +25,7 @@ function Login (props) {
   React.useEffect(() => {
     const regexEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
     const regexPassword = /^[a-zA-Z0-9-_!?]+$/;
-    const passwordValidity = formValues.password.trim().length > 3 && regexPassword.test(formValues.password);
+    const passwordValidity = formValues.password.trim().length > 5 && regexPassword.test(formValues.password);
     const emailValidity = formValues.email.trim().length > 5 && regexEmail.test(formValues.email.trim());
     setIsPasswordValid(passwordValidity);
     setIsEmailValid(emailValidity);

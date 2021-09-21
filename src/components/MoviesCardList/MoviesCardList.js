@@ -3,7 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
 
 const MoviesCardList = (props) => {
-  const { place, moviesList, handleLikeClick } = props;
+  const { place, moviesList, handleLikeClick, savedCards } = props;
   const [cardNumber, setCardNumber] = React.useState(0);
   const documentWidth = document.documentElement.clientWidth;
 
@@ -48,6 +48,7 @@ const MoviesCardList = (props) => {
             movie={movie}
             place={place}
             handleLikeClick={handleLikeClick}
+            savedCards={savedCards}
           />
         ))}
       </ul>}

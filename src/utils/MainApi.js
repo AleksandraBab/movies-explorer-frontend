@@ -1,4 +1,4 @@
-import { MAIN_URL } from './config';
+const MAIN_URL = `${window.location.protocol}//api.capibara-movies.nomoredomains.club`;
 
 class Api {
   constructor(options) {
