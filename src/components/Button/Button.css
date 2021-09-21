@@ -1,0 +1,46 @@
+.button {
+  width: 100%;
+  border: 0;
+  background: #4285F4;
+  border-radius: 3px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 69px;
+}
+
+.button_place_singin {
+  margin-top: 179px;
+}
+
+.button_disabled {
+  background: #F8F8F8;
+  color: #C2C2C2;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button_disabled:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 157px;
+  }
+
+  .button_place_singin {
+    margin-top: 267px;
+  }
+}

@@ -1,0 +1,128 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form__heading {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #FFFFFF;
+  margin: 0 0 40px 0;
+  width: 100%;
+}
+
+.form__heading_place_profile {
+  margin-bottom: 123px;
+  text-align: center;
+}
+
+.form__error {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #FF004C;
+  width: 100%;
+  margin: 0 0 20px;
+  position: relative;
+  top: 178px;
+  word-break: break-all;
+}
+
+.form__error_place_profile {
+  top: 218px;
+}
+
+.form__success {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #3DDC84;
+  width: 100%;
+  margin: 0 0 20px;
+  position: relative;
+  top: 218px;
+  word-break: break-all;
+}
+
+.form__button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 220px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form__button_disabled {
+  color: #C2C2C2;
+  opacity: 0.5;
+}
+
+.form__button:hover {
+  opacity: 0.8;
+}
+
+.form__button_disabled:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  .form__heading_place_profile {
+    margin-bottom: 96px;
+  }
+
+  .form__button {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    margin-bottom: 14px;
+  }
+
+  .form__heading {
+    margin-bottom: 80px;
+    text-align: center;
+  }
+
+  .form__heading_place_profile {
+    margin-bottom: 80px;
+  }
+
+  .form__button {
+    margin-top: 379px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .form__error {
+    top: 266px;
+  }
+
+  .form__error_place_profile {
+    top: 370px;
+  }
+
+  .form__success {
+    top: 370px;
+  }
+}

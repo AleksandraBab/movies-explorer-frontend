@@ -1,0 +1,109 @@
+.movie {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ width: 100%;
+ box-sizing: border-box;
+ padding: 6px;
+ background: #2F2F2F;
+}
+
+.movie__about {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 20px;
+}
+
+.movie__texts {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.mobie__title {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin: 0 0 13px 0;
+}
+
+.mobie__duration {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  margin: 0;
+}
+
+.movie__btn {
+  width: 14px;
+  height: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 0;
+  background-color: transparent;
+}
+
+.movie__btn:hover {
+  opacity: 0.8;
+}
+
+.movie__btn_place_all {
+  background-image: url(../../images/dislike.svg);
+}
+
+.movie__btn_place_saved {
+  background-image: url(../../images/cross.svg);
+}
+
+.movie__btn_liked {
+  background-image: url(../../images/like.svg);
+}
+
+.movie__img {
+  width: 220px;
+  height: 122px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width: 600px) {
+  .movie {
+    flex-direction: column;
+    padding: 0 0 14px 0;
+  }
+
+  .movie__about {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 12px 0;
+    order: 2;
+  }
+
+  .movie__texts {
+    margin-bottom: 0;
+  }
+
+  .mobie__title {
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 8px;
+  }
+
+  .movie__img {
+    width: 100%;
+    height: auto;
+    order: 1;
+  }
+}
